@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Menu, Search, Sun, Moon } from "lucide-react"
+import { Menu, Sun, Moon } from "lucide-react"
 import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import SearchBar from "./SearchBar"
+import Link from "next/link"
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,25 +27,24 @@ export function Header() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Input
-                  type="search"
-                  placeholder="Search..."
-                  className="pl-10 pr-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                />
+                <SearchBar/>
               </div>
-              <Button
-                variant="ghost"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                Features
-              </Button>
-              <Button
-                variant="ghost"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                About
-              </Button>
+              <Link href="/sell">
+                    <Button
+                    variant="ghost"
+                    className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                    >
+                    Sell
+                    </Button>
+              </Link>
+              <Link href="/buy">
+                <Button
+                    variant="ghost"
+                    className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                    >
+                    My Tickets
+                </Button>
+              </Link>
               {isSignedIn ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -79,14 +79,6 @@ export function Header() {
                   </Button>
                 </SignInButton>
               )}
-              {/* <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-              >
-                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button> */}
             </div>
           </div>
           <div className="md:hidden flex items-center">
@@ -106,25 +98,24 @@ export function Header() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <div className="relative mb-3">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              <Input
-                type="search"
-                placeholder="Search..."
-                className="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
-              />
+              <SearchBar/>
             </div>
-            <Button
-              variant="ghost"
-              className="w-full text-left text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            >
-              Features
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full text-left text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
-            >
-              About
-            </Button>
+            <Link href="/sell">
+                <Button
+                variant="ghost"
+                className="w-full text-left text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                Sell
+                </Button>
+            </Link>
+            <Link href="/buy">
+                <Button
+                variant="ghost"
+                className="w-full text-left text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                >
+                My Tickets
+                </Button>
+            </Link>
             {isSignedIn ? (
               <>
                 <div className="flex items-center space-x-4 px-3 py-2">
